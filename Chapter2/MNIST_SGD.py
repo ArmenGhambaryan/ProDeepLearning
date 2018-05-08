@@ -82,16 +82,16 @@ with tf.Session() as sess:
 			sess.run(op_train, feed_dict={X:train_X[j*batch_size:(j+1)*batch_size],
 				Y:train_Y[j*batch_size:(j+1)*batch_size]})
 			actual_batch_size = train_X[j*batch_size:(j+1)*batch_size].shape[0]
-			epoch_cost += actual_batch_size*sess.run(cost,feed_dict=\
-				{X:train_X[j*batch_size:(j+1)*batch_size],Y:train_Y[j*batch_size:(j+1)*batch_size]})
-			epoch_cost = epoch_cost/float(train_X.shape[0])
-			epoch_accuracy = np.mean(np.argmax(sess.run(out,feed_dict={X:train_X,Y:train_Y}),
-				axis=1)==np.argmax(train_Y,axis=1))
-			epoch_cost_trace.append(epoch_cost)
-			epoch_accuracy_trace.append(epoch_accuracy)
+		epoch_cost += actual_batch_size*sess.run(cost,feed_dict=\
+			{X:train_X[j*batch_size:(j+1)*batch_size],Y:train_Y[j*batch_size:(j+1)*batch_size]})
+		epoch_cost = epoch_cost/float(train_X.shape[0])
+		epoch_accuracy = np.mean(np.argmax(sess.run(out,feed_dict={X:train_X,Y:train_Y}),
+			axis=1)==np.argmax(train_Y,axis=1))
+		epoch_cost_trace.append(epoch_cost)
+		epoch_accuracy_trace.append(epoch_accuracy)
 
-			if (((i+1) >= 100) and ((i+1) % 100 == 0)):
-				print('Epoch:',(i+1),'Average loss:',epoch_cost,'accuracy:',epoch_accuracy)
+		if (((i+1) >= 100) and ((i+1) % 100 == 0)):
+			print('Epoch:',(i+1),'Average loss:',epoch_cost,'accuracy:',epoch_accuracy)
 	print('Final epoch training results:','Average loss:',epoch_cost,'accuracy:',epoch_accuracy)
 	loss_test = sess.run(cost, feed_dict={X:test_X,Y:test_Y})
 	test_pred = np.argmax(sess.run(out,feed_dict={X:test_X,Y:test_Y}),axis=1)
@@ -105,3 +105,4 @@ print('Predicted digits:',test_pred[0:10])
 print('Actual images of the digits follow:')
 for i in range(10):
 	a[i].imshow(np.reshape(test_X[i],(28,28)))
+plt.show()
