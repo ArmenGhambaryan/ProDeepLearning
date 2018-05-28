@@ -1,0 +1,4 @@
+/Chapter3/MNIST_data
+*.json
+*.csv
+*.txt
