@@ -1,4 +1,8 @@
 /Chapter3/MNIST_data
+/Chapter3/flower_photos
+/Chapter3/CatvsDog
+/Chapter3/checkpoints
+/Chapter3/slim
 *.json
 *.csv
 *.txt
